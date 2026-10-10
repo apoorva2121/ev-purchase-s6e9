@@ -1,0 +1,8 @@
+C:\Users\apoor\anaconda3\Lib\site-packages\sklearn\cluster\_kmeans.py:1955: UserWarning: MiniBatchKMeans is known to have a memory leak on Windows with MKL, when there are less chunks than available threads. You can prevent it by setting batch_size >= 2048 or by setting the environment variable OMP_NUM_THREADS=4
+  warnings.warn(
+reference exp05                OOF=0.94579
+
+exp15_pair_interact_te         OOF=0.94576 nfeat=60 (1391s)
+exp16_interaction_cons         OOF=0.94583 nfeat=33 (1051s)
+C:\Users\apoor\anaconda3\Lib\site-packages\lightgbm\callback.py:332: UserWarning: Early stopping is not available in dart mode
+  _log_warning("Early stopping is not available in dart mode")

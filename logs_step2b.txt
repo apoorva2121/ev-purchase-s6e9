@@ -1,0 +1,14 @@
+reference lgb42 OOF=0.94574
+
+d1_digits                          split=42  OOF=0.94579 nfeat=50 (757s)
+d2_ladder                          split=42  OOF=0.94589 nfeat=39 (808s)
+d3_semite                    OOF=0.94585 nfeat=33 (809s)
+d4_all                       OOF=0.94595 nfeat=56 (1123s)
+d3_canary                    OOF=0.50227 nfeat=33 (256s)
+  SEMI-TE CANARY = 0.50227 -> FAIL
+
+=== STEP 2 (vs lgb42 0.94574) ===
+  d4_all         0.94595  +0.00021
+  d2_ladder      0.94589  +0.00015
+  d3_semite      0.94585  +0.00011
+  d1_digits      0.94579  +0.00005

@@ -1,0 +1,29 @@
+########## batch4 START 01:16:00 ##########
+reference exp05 OOF=0.94579
+
+exp24: building kNN-target feature (fold-safe)...
+  knn feature built (211s), standalone AUC=0.85973
+exp24_knn_target               OOF=0.94567 (437s)
+exp25_refit_all                OOF=0.94578 (484s)
+
+exp26: HistGradientBoosting
+exp26_histgb                   OOF=0.94556 (325s)
+
+exp27: logistic stacking on OOF (distribution-matched)
+  members=56  stack OOF=0.94598  delta_vs_exp05=+0.00019
+
+=== BATCH4 (paired vs exp05) ===
+  exp27_logistic_stack         0.94598 delta=+0.00019
+  exp25_refit_all              0.94578 delta=-0.00000
+  exp24_knn_target             0.94567 delta=-0.00012
+  exp26_histgb                 0.94556 delta=-0.00023
+########## batch4 DONE  01:41:03 ##########
+########## woe START 01:41:03 ##########
+reference                    OOF=0.94566
+
+exp07_woe_only               OOF=0.94567  nfeat=30  (358s)
+    paired vs ref: +0.00001  sd=0.00001  P(>0)=0.690
+exp08_woe_plus_te            OOF=0.94565  nfeat=36  (413s)
+    paired vs ref: -0.00001  sd=0.00001  P(>0)=0.290
+########## woe DONE  01:58:39 ##########
+########## TAIL QUEUE DONE ##########

@@ -1,0 +1,11 @@
+lgb303                             split=42  OOF=0.94574 nfeat=33 (778s)
+lgb404                             split=42  OOF=0.94574 nfeat=33 (820s)
+lgb505                             split=42  OOF=0.94572 nfeat=33 (912s)
+lgb606                             split=42  OOF=0.94575 nfeat=33 (908s)
+lgb707                             split=42  OOF=0.94575 nfeat=33 (921s)
+lgb808                             split=42  OOF=0.94574 nfeat=33 (970s)
+lgb909                             split=42  OOF=0.94571 nfeat=33 (1081s)
+
+=== SEED BAG (10 seeds, equal rank weights) ===
+  solo mean=0.94574 sd=0.00001 min=0.94571 max=0.94576
+  BAG OOF = 0.94578   gain over best single = +0.00003

@@ -1,0 +1,16 @@
+feature matrix (668665, 33)
+  lgb-s42   OOF=0.94574  rounds~2202  (1750s)
+  lgb-s101  OOF=0.94576  rounds~2234  (2163s)
+  lgb-s202  OOF=0.94576  rounds~1991  (2552s)
+  xgb-s42   OOF=0.94571  rounds~1678  (1428s)
+  xgb-s101  OOF=0.94569  rounds~1450  (1191s)
+  cat-s42   OOF=0.94570  rounds~1827  (2617s)
+
+=== BLEND (marginal gain, rank space) ===
+  + lgb202   (seed) solo=0.94576
+  + cat42    marginal=+0.000046  rho_with_ensemble=0.99771
+  + lgb101   marginal=+0.000013  rho_with_ensemble=0.99914
+  stop: best marginal gain -0.0000019
+
+  BLEND OOF = 0.94581   members=['lgb202', 'cat42', 'lgb101']
+  duplicate-member test: -0.0000054 (must be ~0)

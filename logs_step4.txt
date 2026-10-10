@@ -1,0 +1,13 @@
+fitting outlier scorers on train+test (label-free)...
+reference lgb42 OOF=0.94574
+
+f1_floors_nan                      split=42  OOF=0.94575 nfeat=33 (1359s)
+f2_nan_outlier                     split=42  OOF=0.94573 nfeat=36 (1029s)
+f3_outlier_only                    split=42  OOF=0.94572 nfeat=36 (1413s)
+f1_floors_nan_splitB               split=7   OOF=0.94578 nfeat=33 (1225s)
+
+=== STEP 4 (vs lgb42 0.94574) ===
+  f1_floors_nan_splitB   0.94578  +0.00004
+  f1_floors_nan          0.94575  +0.00001
+  f2_nan_outlier         0.94573  -0.00001
+  f3_outlier_only        0.94572  -0.00002

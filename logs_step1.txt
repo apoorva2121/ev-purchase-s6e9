@@ -1,0 +1,26 @@
+reference lgb42 (honest ES, 5x80% test TE) OOF=0.94574
+
+Traceback (most recent call last):
+  File "C:\dev\important repo\ml-bench\ev-purchase-s6e9\src\step1_precision.py", line 38, in <module>
+    R["s1a_fulltest_te"] = run_full_test_te("s1a_fulltest_te",keys)
+                           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\dev\important repo\ml-bench\ev-purchase-s6e9\src\step1_precision.py", line 30, in run_full_test_te
+    Xtr,Xva,_=te_fold(Xtr,Xva,dummy,ti,vi,ytr,kt,kte,inner_seed=split_seed+1)
+              ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\dev/important repo/ml-bench/ev-purchase-s6e9/src\common.py", line 69, in te_fold
+    for m in smooths: Xva[f"te{m}_{n}"]=ap(kv[vi],*st[n],pr,m);Xt[f"te{m}_{n}"]=ap(kd2[n],*st[n],pr,m)
+                                                               ~~^^^^^^^^^^^^^^
+  File "C:\Users\apoor\anaconda3\Lib\site-packages\pandas\core\frame.py", line 4322, in __setitem__
+    self._set_item(key, value)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\apoor\anaconda3\Lib\site-packages\pandas\core\frame.py", line 4535, in _set_item
+    value, refs = self._sanitize_column(value)
+                  ~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\apoor\anaconda3\Lib\site-packages\pandas\core\frame.py", line 5288, in _sanitize_column
+    com.require_length_match(value, self.index)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\apoor\anaconda3\Lib\site-packages\pandas\core\common.py", line 573, in require_length_match
+    raise ValueError(
+    ...<4 lines>...
+    )
+ValueError: Length of values (286571) does not match length of index (1)

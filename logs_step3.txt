@@ -1,0 +1,14 @@
+reference lgb42 (TE on 2 columns only) OOF=0.94574
+
+e1_te_all_cols                     split=42  OOF=0.94578 nfeat=66 (1260s)
+e2_te_all_pairs                    split=42  OOF=0.94576 nfeat=84 (1378s)
+e3_te_all_binned                   split=42  OOF=0.94576 nfeat=72 (1534s)
+e1_te_all_cols_splitB              split=7   OOF=0.94584 nfeat=66 (1415s)
+e_canary                           split=42  OOF=0.50017 nfeat=66 (493s)
+  TE-ALL CANARY = 0.50017 -> PASS
+
+=== STEP 3 (vs lgb42 0.94574) ===
+  e1_te_all_cols_splitB    0.94584  +0.00010
+  e1_te_all_cols           0.94578  +0.00004
+  e2_te_all_pairs          0.94576  +0.00002
+  e3_te_all_binned         0.94576  +0.00002

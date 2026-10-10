@@ -1,0 +1,58 @@
+reference lgb42 OOF=0.94574
+
+[LightGBM] [Fatal] The number of features in data (50) is not the same as it was in training data (49).
+You can set ``predict_disable_shape_check=true`` to discard this error, but please be aware what you are doing.
+Traceback (most recent call last):
+  File "C:\dev\important repo\ml-bench\ev-purchase-s6e9\src\step2.py", line 71, in <module>
+    R["d1_digits"]  = run_cv("d1_digits",build_digits,keys,fit_lgb(BASE,42),42)[0]
+                      ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\dev/important repo/ml-bench/ev-purchase-s6e9/src\cv.py", line 40, in run_cv
+    o,t=fit_fn(Xtr,ytr,Xva,Xt); oof[vi]=o; pred+=t/NFOLD
+        ~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\dev/important repo/ml-bench/ev-purchase-s6e9/src\cv.py", line 17, in f
+    return m.predict(Xva),m.predict(Xt)
+                          ~~~~~~~~~^^^^
+  File "C:\Users\apoor\anaconda3\Lib\site-packages\lightgbm\basic.py", line 4894, in predict
+    return predictor.predict(
+           ~~~~~~~~~~~~~~~~~^
+        data=data,
+        ^^^^^^^^^^
+    ...<6 lines>...
+        validate_features=validate_features,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\apoor\anaconda3\Lib\site-packages\lightgbm\basic.py", line 1140, in predict
+    preds, nrow = self.__pred_for_np2d(
+                  ~~~~~~~~~~~~~~~~~~~~^
+        mat=data,
+        ^^^^^^^^^
+    ...<2 lines>...
+        predict_type=predict_type,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\apoor\anaconda3\Lib\site-packages\lightgbm\basic.py", line 1296, in __pred_for_np2d
+    return self.__inner_predict_np2d(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        mat=mat,
+        ^^^^^^^^
+    ...<3 lines>...
+        preds=None,
+        ^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\apoor\anaconda3\Lib\site-packages\lightgbm\basic.py", line 1237, in __inner_predict_np2d
+    _safe_call(
+    ~~~~~~~~~~^
+        _LIB.LGBM_BoosterPredictForMat(
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<12 lines>...
+        )
+        ^
+    )
+    ^
+  File "C:\Users\apoor\anaconda3\Lib\site-packages\lightgbm\basic.py", line 297, in _safe_call
+    raise LightGBMError(_LIB.LGBM_GetLastError().decode("utf-8"))
+lightgbm.basic.LightGBMError: The number of features in data (50) is not the same as it was in training data (49).
+You can set ``predict_disable_shape_check=true`` to discard this error, but please be aware what you are doing.

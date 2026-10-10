@@ -1,0 +1,6 @@
+  fold auc=0.94338 (1324s)
+  fold auc=0.94417 (2586s)
+  fold auc=0.94508 (3402s)
+  fold auc=0.94455 (4054s)
+  fold auc=0.94430 (4731s)
+mlp_embed_5seed OOF=0.94429 (4731s)

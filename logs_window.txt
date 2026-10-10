@@ -1,0 +1,12 @@
+reference lgb42 (exact+binned TE, honest ES) OOF=0.94574
+
+w1_windows_only                split=42 nfold=5 OOF=0.94564 nfeat=29 (536s)
+w2_windows_plus_te             split=42 nfold=5 OOF=0.94583 nfeat=44 (1336s)
+w3_wte_10fold                  split=42 nfold=10 OOF=0.94599 nfeat=44 (3444s)
+w4_wte_splitB                  split=7 nfold=5 OOF=0.94583 nfeat=44 (1124s)
+
+=== WINDOW ENCODINGS (vs lgb42 0.94574) ===
+  w3_wte_10fold          0.94599  +0.00025
+  w2_windows_plus_te     0.94583  +0.00009
+  w4_wte_splitB          0.94583  +0.00009
+  w1_windows_only        0.94564  -0.00010

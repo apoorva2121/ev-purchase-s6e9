@@ -1,0 +1,13 @@
+5-fold refs: split A lgb42=0.94574   split B exp05=0.94576
+w3 (windows+TE, 10-fold, split A) was 0.94599
+
+g1_exp05_10fold_A          nfold=10  split=42 OOF=0.94591 (1681s)
+g2_exp05_10fold_B          nfold=10  split=7 OOF=0.94591 (2110s)
+g3_win_10fold_B                split=7 nfold=10 OOF=0.94596 nfeat=44 (3037s)
+g4_exp05_20fold_A          nfold=20  split=42 OOF=0.94595 (4014s)
+
+=== STEP 5 ===
+  g3_win_10fold_B        0.94596
+  g4_exp05_20fold_A      0.94595
+  g2_exp05_10fold_B      0.94591
+  g1_exp05_10fold_A      0.94591

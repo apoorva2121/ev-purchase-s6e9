@@ -1,0 +1,123 @@
+waiting; currently 3 of ours
+########## second_split START 17:16:50 ##########
+exp01_exact_honest_sA              split=42  OOF=0.94562 nfeat=24 (1364s)
+exp00_raw_sB                       split=7   OOF=0.94338 nfeat=13 (2056s)
+exp01_exact_sB                     split=7   OOF=0.94566 nfeat=24 (861s)
+exp05_full_sB                      split=7   OOF=0.94576 nfeat=33 (864s)
+
+=== SECOND-SPLIT REPLICATION (honest ES throughout) ===
+  split A: exp05=0.94574 (lgb42)  exp01=0.94562  delta05-01=+0.00012
+  split B: exp05=0.94576  exp01=0.94566  delta05-01=+0.00010
+  split B: exp01-exp00=+0.00227   (split A was +0.00346)
+########## second_split DONE  18:43:02 ##########
+########## batch5 START 18:43:02 ##########
+b5_hier250_sB                      split=7   OOF=0.94578 nfeat=39 (520s)
+b5_m1to500_sB                      split=7   OOF=0.94576 nfeat=43 (504s)
+b5_mdl50_sB                        split=7   OOF=0.94574 nfeat=33 (490s)
+b5_mdl200_sB                       split=7   OOF=0.94576 nfeat=33 (499s)
+b5_lr01_sB                         split=7   OOF=0.94578 nfeat=33 (891s)
+b5_lgbnative_income_sB             split=7   OOF=0.94450 nfeat=31 (240s)
+b5_catsolo_native_sB               split=7   OOF=0.94316 nfeat=17 (6040s)
+
+=== BATCH5 on split B (compare to exp05_full_sB) ===
+  lr01                 0.94578
+  hier250              0.94578
+  m_1_500              0.94576
+  mdl200               0.94576
+  mdl50                0.94574
+  lgb_native_income    0.94450
+  cat_solo_native      0.94316
+########## batch5 DONE  21:16:26 ##########
+########## seedbag START 21:16:26 ##########
+lgb303                             split=42  OOF=0.94574 nfeat=33 (948s)
+lgb404                             split=42  OOF=0.94574 nfeat=33 (897s)
+lgb505                             split=42  OOF=0.94572 nfeat=33 (910s)
+lgb606                             split=42  OOF=0.94575 nfeat=33 (900s)
+lgb707                             split=42  OOF=0.94575 nfeat=33 (1001s)
+lgb808                             split=42  OOF=0.94574 nfeat=33 (673s)
+lgb909                             split=42  OOF=0.94571 nfeat=33 (552s)
+
+=== SEED BAG (10 seeds, equal rank weights) ===
+  solo mean=0.94574 sd=0.00001 min=0.94571 max=0.94576
+  BAG OOF = 0.94578   gain over best single = +0.00003
+########## seedbag DONE  22:55:15 ##########
+########## batch6 START 22:55:15 ##########
+b6_pairhier_sB                     split=7   OOF=0.94550 nfeat=60 (797s)
+  triple-match rate train=0.0169 test=0.0166; among matched, mean extra cols matched=3.53 of 10
+  label rate by n_matched: -1:0.1767(n=657388), 1:0.0588(n=765), 2:0.0578(n=1714), 3:0.0504(n=2619), 4:0.0532(n=3156), 5:0.0508(n=2144), 6:0.0512(n=664)
+b6_srcrow_sB                       split=7   OOF=0.94577 nfeat=37 (566s)
+
+  probit per anxiety level (income coef = 1/sigma proxy):
+    Low     n= 603972 pos=0.1890  inc=+1.414 concern=+0.740 subsidy=+2.350 const=-6.743  implied sigma=0.849
+    Medium  n=  62499 pos=0.0417  inc=+1.296 concern=+0.621 subsidy=+1.993 const=-6.815  implied sigma=0.926
+    High    n=   2194 pos=0.0014  inc=+1.797 concern=+4.671 subsidy=+4.506 const=-31.650  implied sigma=0.668
+canary_honest                      split=42  OOF=0.49962 nfeat=33 (188s)
+  CANARY honest-ES pipeline = 0.49962  band |a-0.5|<0.0019 -> PASS
+
+=== BATCH6 on split B ===
+  pair_hier    0.94550
+  src_row      0.94577
+########## batch6 DONE  23:21:51 ##########
+########## batch3b START 23:21:51 ##########
+b3b_goss_sB                        split=7   OOF=0.94563 nfeat=33 (454s)
+b3b_lineartree_sB                  split=7   OOF=0.94575 nfeat=33 (578s)
+b3b_catparams_sB                   split=7   OOF=0.94577 nfeat=33 (464s)
+b3b_kmeans_sB                      split=7   OOF=0.94564 nfeat=36 (445s)
+b3b_onehot_sB                      split=7   OOF=0.94574 nfeat=38 (691s)
+b3b_dropgender_sB                  split=7   OOF=0.94576 nfeat=32 (726s)
+b3b_dart2000_sB                    split=7   OOF=0.94531 nfeat=33 (2798s)
+
+=== BATCH3b on split B (compare to exp05_full_sB) ===
+  catparams    0.94577
+  drop_gender  0.94576
+  linear_tree  0.94575
+  onehot       0.94574
+  kmeans       0.94564
+  goss         0.94563
+  dart2000     0.94531
+########## batch3b DONE  01:04:51 ##########
+########## batch4 START 01:04:51 ##########
+reference exp05 OOF=0.94579
+
+exp24: building kNN-target feature (fold-safe)...
+  knn feature built (197s), standalone AUC=0.85973
+exp24_knn_target               OOF=0.94567 (370s)
+exp25_refit_all                OOF=0.94578 (363s)
+
+exp26: HistGradientBoosting
+exp26_histgb                   OOF=0.94556 (298s)
+
+exp27: logistic stacking on OOF (distribution-matched)
+  members=54  stack OOF=0.94598  delta_vs_exp05=+0.00019
+
+=== BATCH4 (paired vs exp05) ===
+  exp27_logistic_stack         0.94598 delta=+0.00019
+  exp25_refit_all              0.94578 delta=-0.00000
+  exp24_knn_target             0.94567 delta=-0.00012
+  exp26_histgb                 0.94556 delta=-0.00023
+########## batch4 DONE  01:26:02 ##########
+########## woe START 01:26:02 ##########
+reference                    OOF=0.94566
+
+exp07_woe_only               OOF=0.94567  nfeat=30  (424s)
+    paired vs ref: +0.00001  sd=0.00001  P(>0)=0.690
+exp08_woe_plus_te            OOF=0.94565  nfeat=36  (444s)
+    paired vs ref: -0.00001  sd=0.00001  P(>0)=0.290
+########## woe DONE  01:45:59 ##########
+########## mlp_embed START 01:46:00 ##########
+  fold auc=0.94338 (783s)
+  fold auc=0.94417 (1307s)
+  fold auc=0.94508 (1834s)
+  fold auc=0.94455 (2362s)
+  fold auc=0.94430 (2887s)
+mlp_embed_5seed OOF=0.94429 (2888s)
+########## mlp_embed DONE  02:34:22 ##########
+########## mlp START 02:34:22 ##########
+  fold done auc=0.94357 (411s)
+  fold done auc=0.94429 (820s)
+  fold done auc=0.94543 (1228s)
+  fold done auc=0.94487 (1639s)
+  fold done auc=0.94443 (2048s)
+exp28_mlp5seed OOF=0.94451 (2048s)
+########## mlp DONE  03:08:39 ##########
+########## ALL DONE ##########

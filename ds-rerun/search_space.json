@@ -1,0 +1,245 @@
+{
+  "cv": {
+    "scheme": "stratified (make_split.py), fixed 5 folds",
+    "n_splits": 5,
+    "n_repeats": 1,
+    "groups": null,
+    "seed": 42
+  },
+  "primary_metric": "roc_auc",
+  "noise_floor_sd": 0.0005,
+  "noise_floor_definition": "OPERATIVE noise floor = 0.00050 ROC-AUC: sd of the CV mean across 8 bootstrap resamples of the 434,632 training rows (StratifiedKFold(5) inside each). The skill prescribes repeat_sd from RepeatedStratifiedKFold(5x5), which on this data is 0.0000015 and DEGENERATE: repeats reshuffle partitions of the same rows rather than resampling data, so at n=434k every partition is compositionally near-identical and the statistic measures partition jitter, not sampling noise. Using it would declare a 0.0001 difference significant. Deviation logged in decision_log.md Stage 2.",
+  "fixed_steps": [
+    "stateless clean_raw(): whitespace strip on 6 categoricals; impossible-value rules both ends (0 fired); Range_Anxiety_Level ordered Low<Medium<High; id kept as string key, never a feature",
+    "no columns dropped as leaks (Stage 3: all 13 features ship in the competition test.csv, so all are available at prediction time)",
+    "no rows removed (0 duplicates, 0 missing targets, 0 impossible values, extremes are signal at 5.73x lift)"
+  ],
+  "stages": {
+    "missing_values": [
+      {
+        "name": "none",
+        "applies_to": [
+          "linear",
+          "gbdt"
+        ],
+        "proxy_scores": {
+          "linear": [
+            0.937959,
+            0.0004
+          ],
+          "gbdt": [
+            0.940585,
+            0.0004
+          ]
+        },
+        "note": "simplest; all gaps below the 0.00050 sampling noise floor"
+      },
+      {
+        "name": "floor_indicator_kept_value",
+        "applies_to": [
+          "linear",
+          "gbdt"
+        ],
+        "proxy_scores": {
+          "linear": [
+            0.938116,
+            0.0004
+          ],
+          "gbdt": [
+            0.940585,
+            0.0004
+          ]
+        },
+        "note": "best on linear (+0.000157 vs none, consistent across folds but below the noise floor)"
+      },
+      {
+        "name": "floors_nan_native",
+        "applies_to": [
+          "gbdt"
+        ],
+        "proxy_scores": {
+          "gbdt": [
+            0.940609,
+            0.0003
+          ]
+        },
+        "note": "best on gbdt (+0.000024 vs none); requires native NaN handling"
+      }
+    ],
+    "outliers": [
+      {
+        "name": "none",
+        "applies_to": [
+          "linear",
+          "gbdt"
+        ],
+        "proxy_scores": {
+          "linear": [
+            0.937959,
+            0.0004
+          ],
+          "gbdt": [
+            0.940585,
+            0.0004
+          ]
+        },
+        "note": "income extremes are SIGNAL (target lift 5.73), not error; 0 rows beyond 3 IQR"
+      },
+      {
+        "name": "winsorize_p01_p99",
+        "applies_to": [
+          "linear"
+        ],
+        "proxy_scores": {
+          "linear": [
+            0.937992,
+            0.0005
+          ]
+        },
+        "note": "best on linear by +0.000033, i.e. 15x below the noise floor"
+      },
+      {
+        "name": "anomaly_score_feature",
+        "applies_to": [
+          "gbdt"
+        ],
+        "proxy_scores": {
+          "gbdt": [
+            0.940646,
+            0.0003
+          ]
+        },
+        "note": "+0.000061 (8x below noise) for an extra IsolationForest per fold; expected to lose the Stage 8 tie-break on cost"
+      }
+    ],
+    "features": [
+      {
+        "name": "none",
+        "applies_to": [
+          "linear",
+          "gbdt",
+          "xgb",
+          "cat"
+        ],
+        "proxy_scores": {
+          "linear": [
+            0.937959,
+            0.000437
+          ],
+          "gbdt": [
+            0.940585,
+            0.000401
+          ]
+        },
+        "note": "reference; no target encoding"
+      },
+      {
+        "name": "ladder3",
+        "applies_to": [
+          "linear",
+          "gbdt",
+          "xgb",
+          "cat"
+        ],
+        "proxy_scores": {
+          "linear": [
+            0.942641,
+            0.000432
+          ],
+          "gbdt": [
+            0.944588,
+            0.000337
+          ]
+        },
+        "note": "income TE ladder exact+//50+//500; +0.004002 on gbdt vs none = 8x the noise floor"
+      },
+      {
+        "name": "ladder3_commute",
+        "applies_to": [
+          "linear",
+          "gbdt",
+          "xgb",
+          "cat"
+        ],
+        "proxy_scores": {
+          "linear": [
+            0.943217,
+            0.000419
+          ],
+          "gbdt": [
+            0.944706,
+            0.000522
+          ]
+        },
+        "note": "ladder3 + commute ladder; +0.000576 over ladder3 on LINEAR (clears noise floor), +0.000119 on gbdt (tie)"
+      }
+    ],
+    "models": [
+      {
+        "name": "gbdt_lightgbm",
+        "applies_to": [
+          "gbdt"
+        ],
+        "proxy_scores": {
+          "gbdt": [
+            0.944667,
+            0.000384
+          ]
+        },
+        "note": "best family and the cheapest (27.6s per 5-fold sweep)"
+      },
+      {
+        "name": "linear_logistic",
+        "applies_to": [
+          "linear"
+        ],
+        "proxy_scores": {
+          "linear": [
+            0.942641,
+            0.000432
+          ]
+        },
+        "note": "-0.002026 vs best, outside the noise floor, but carried because it serves a family the others do not: different inductive bias and the only interpretable option"
+      },
+      {
+        "name": "xgboost",
+        "applies_to": [
+          "xgb"
+        ],
+        "proxy_scores": {
+          "xgb": [
+            0.944084,
+            0.000382
+          ]
+        },
+        "note": "-0.000583 at DEFAULTS, just outside the noise floor; carried because it is cheap (33s) and default-settings order need not survive tuning"
+      }
+    ],
+    "imbalance": [
+      {
+        "name": "none_default",
+        "applies_to": [
+          "linear",
+          "gbdt",
+          "xgb"
+        ],
+        "proxy_scores": {
+          "gbdt": [
+            0.944667,
+            0.000384
+          ]
+        },
+        "note": "all three imbalance options within 0.000062 = 8x below the noise floor; ROC-AUC is threshold-free and ratio-insensitive, so no handling is applied"
+      }
+    ]
+  },
+  "noise_thresholds": {
+    "repeat_sd_as_skill_prescribes": 1.5e-06,
+    "bootstrap_sd_of_cv_mean_OPERATIVE": 0.0005,
+    "fold_sd": 0.000825,
+    "fold_sd_over_sqrt_k": 0.000369,
+    "frozen_test_hanley_mcneil_se": 0.00112,
+    "frozen_test_ci95_halfwidth": 0.002195,
+    "same_fold_paired_comparisons": "use Nadeau-Bengio corrected paired SE from ds-method-comparison/scripts/screen.py"
+  }
+}
